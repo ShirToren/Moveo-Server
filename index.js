@@ -85,7 +85,6 @@ const handleMessage = (bytes, uuid) => {
 };
 
 const handleClose = (uuid) => {
-  console.log(`${users[uuid].username} disconnected`);
   delete connections[uuid];
   delete users[uuid];
   broadcast();
@@ -101,7 +100,6 @@ const broadcast = () => {
 
 wsServer.on("connection", (connection, request) => {
   const { username } = url.parse(request.url, true).query;
-  console.log(`${username} connected`);
   const uuid = uuidv4();
   connections[uuid] = connection;
   numOfClients = numOfClients + 1;
